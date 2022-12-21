@@ -2,5 +2,6 @@
 """Square generation module for Python project 0x06
 """
 class Square:
-    """class defined for square generation """
+    """class defined for square generation 
+    """
     pass
