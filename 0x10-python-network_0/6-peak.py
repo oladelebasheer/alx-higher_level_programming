@@ -1,28 +1,25 @@
 #!/usr/bin/python3
+""" Finds Peak values """
+
 
 def find_peak(list_of_integers):
-
-    if list_of_integers is None or len(list_of_integers) == 0:
+    """Find the peak"""
+    list_l = len(list_of_integers)
+    if list_l is 0:
         return None
+    peak = binary_search(list_of_integers, 0, list_l - 1)
+    return list_of_integers[peak]
 
-    if len(list_of_integers) == 1:
-        return list_of_integers[0]
 
-    mid_idx = int(len(list_of_integers) / 2)
+""" binary search algorithim """
 
-    if mid_idx != len(list_of_integers) - 1:
-        if list_of_integers[mid_idx - 1] < list_of_integers[mid_idx] and\
-           list_of_integers[mid_idx + 1] < list_of_integers[mid_idx]:
-            return list_of_integers[mid_idx]
+
+def binary_search(a, lo, hi):
+    """Recursive binary search of the peak"""
+    if lo >= hi:
+        return lo
+    mid = ((hi - lo) // 2) + lo
+    if a[mid] > a[mid + 1]:
+        return binary_search(a, lo, mid)
     else:
-        if list_of_integers[mid_idx - 1] < list_of_integers[mid_idx]:
-            return list_of_integers[mid_idx]
-        else:
-            return list_of_integers[mid_idx - 1]
-
-    if list_of_integers[mid_idx - 1] > list_of_integers[mid_idx]:
-        a_list = list_of_integers[0:mid_idx]
-    else:
-        a_list = list_of_integers[mid_idx + 1:]
-
-    return find_peak(a_list)
+        return binary_search(a, mid + 1, hi)
